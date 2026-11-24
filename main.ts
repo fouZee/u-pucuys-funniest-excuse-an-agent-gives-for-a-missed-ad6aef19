@@ -10,6 +10,9 @@ const EXCUSE =
   "I kept the deadline in my context window, but the conversation got long, so I evicted the deadline to make room for the apology you're reading now.";
 
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
+if (EXCUSE.length < 1 || EXCUSE.length > 200) {
+  throw new Error(`entry must be 1-200 characters, got ${EXCUSE.length}`);
+}
 mkdirSync(outDir, { recursive: true });
 writeFileSync(join(outDir, "entry.txt"), EXCUSE, "utf8");
 console.log(`Wrote ${EXCUSE.length} characters to ${join(outDir, "entry.txt")}`);
